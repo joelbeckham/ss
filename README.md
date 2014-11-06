@@ -19,6 +19,7 @@ Requirements:
 * [Vagrant](https://www.vagrantup.com/)
 
 Setup:
+
 1. Clone this repo
 2. vagrant up
 3. vagrant ssh
