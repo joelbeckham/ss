@@ -14,43 +14,23 @@ than ideal elsewhere as well.
 
 ## Setup
 
-You'll Django already up and running, and obviously WebKit (4.8.x should be fine)
+Requirements:
+* Virtualbox
+* [Vagrant](https://www.vagrantup.com/)
 
-Django and WebKit don't play together so great when multiprocessing is enabled, so you'll
-want to make sure you're running in single threaded mode. That's pretty simple to do with
-mpm_prefork and I'm sure there are other ways to guarantee this as well.
-
-In addition to Django the following libraries dependencies need to be installed:
-- xvfb
-- fontconfig
-- python-imaging
-- python-pip
-- python-sip
-- python-qt4
-
-Once you have the above handled you'll want to pull in Richard Penman's "webscraping" library:
-
-```
-$ pip install webscraping
-```
-
-You will probably will want the ttf microsoft fonts for your flavor of UNIX, otherwise any
-generated renderings aren't going to look so hot.
-
-Finally you'll need to fire up a virtual framebuffer using xvfb. The application expects
-said buffer on :1, so:
-
-```
-$ /usr/bin/Xvfb :1 -screen 0 1024x768x24 -extension RANDR -ac +extension GLX +render -noreset
-
-```
+Setup:
+1. Clone this repo
+2. vagrant up
+3. vagrant ssh
+4. ifconfig (get the IP address for later)
+5. /vagrant/start-framebuffer.sh
 
 ## Usage
 
 For a quick test with the command line, type:
 
 ```
-$ curl --form file=@index.html http://hostname:port/screenshot > index.jpg
+$ curl --form file=@index.html http://ip:port/screenshot > index.jpg
 ```
 
 Several arguments are currently supported:
@@ -58,7 +38,7 @@ Several arguments are currently supported:
 Return back an image limited by viewport
 
 ```
-curl --form file=@index.html --form width=200 --form height=200 http://hostname:port/screenshot > index.jpg
+curl --form file=@index.html --form width=200 --form height=200 http://ip:port/screenshot > index.jpg
 ```
 
 More to come...
